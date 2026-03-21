@@ -1,7 +1,19 @@
-public class Vehicle {
+package ejemploAbsInterfaces;
+
+public abstract class Vehicle {
     private String brand;
     private String model;
     private int year;
+    private Color color;
+    private VehicleStatus vehicleStatus;
+
+    public Vehicle(String brand, String model, int year, Color color, VehicleStatus vehicleStatus) {
+        this.brand = brand;
+        this.model = model;
+        this.year = year;
+        this.color = color;
+        this.vehicleStatus = vehicleStatus;
+    }
 
     public Vehicle(String brand, String model, int year) {
         this.brand = brand;
@@ -9,11 +21,11 @@ public class Vehicle {
         this.year = year;
     }
 
-
-
     public void stop(){
-        System.out.println("El vehiculo esta parado");
+        System.out.println("El Vehiculo está parado");
     }
+
+    public abstract void drive();
 
     public String getBrand() {
         return brand;
@@ -36,11 +48,10 @@ public class Vehicle {
     }
 
     public void setYear(int year) {
-
         int currentYear = java.time.Year.now().getValue();
 
         if(year < 1886 || year > currentYear + 2){
-            throw new IllegalArgumentException("Invalid year!");
+            throw new IllegalArgumentException("El año no es valido");
         }
 
         this.year = year;
@@ -52,6 +63,8 @@ public class Vehicle {
                 "brand='" + brand + '\'' +
                 ", model='" + model + '\'' +
                 ", year=" + year +
+                ", color=" + color +
+                ", vehicleStatus=" + vehicleStatus +
                 '}';
     }
 }
