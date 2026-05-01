@@ -1,14 +1,24 @@
 package com.devtalles.proyecto;
 
+import java.util.List;
+
 public class Person {
     private String name;
     private Integer age;
     private boolean student;
+    private List<String> hobbies;
 
     public Person(String name, Integer age, boolean student) {
         this.name = name;
         this.age = age;
         this.student = student;
+    }
+
+    public Person(String name, Integer age, boolean student, List<String> hobbies) {
+        this.name = name;
+        this.age = age;
+        this.student = student;
+        this.hobbies = hobbies;
     }
 
     public String getName() {
@@ -33,6 +43,14 @@ public class Person {
 
     public void setStudent(boolean student) {
         this.student = student;
+    }
+
+    public List<String> getHobbies() {
+        return hobbies;
+    }
+
+    public void setHobbies(List<String> hobbies) {
+        this.hobbies = hobbies;
     }
 
     @Override

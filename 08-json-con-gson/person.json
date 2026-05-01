@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Jose",
+    "age": 25,
+    "student": true,
+    "hobbies": [
+      "Correr",
+      "Programar",
+      "Leer",
+      "Estudiar"
+    ]
+  },
+  {
+    "name": "Fernando",
+    "age": 30,
+    "student": false,
+    "hobbies": [
+      "Correr",
+      "Estudiar",
+      "Tenis"
+    ]
+  }
+]
