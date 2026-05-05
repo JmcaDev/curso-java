@@ -3,6 +3,7 @@
     "name": "Jose",
     "age": 25,
     "student": true,
+    "email": "jose@jose.com",
     "hobbies": [
       "Correr",
       "Programar",
@@ -14,6 +15,7 @@
     "name": "Fernando",
     "age": 30,
     "student": false,
+    "email": "fernando@devtalles.com",
     "hobbies": [
       "Correr",
       "Estudiar",

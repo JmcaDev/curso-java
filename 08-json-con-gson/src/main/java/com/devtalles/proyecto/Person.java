@@ -6,7 +6,16 @@ public class Person {
     private String name;
     private Integer age;
     private boolean student;
+    private String email;
     private List<String> hobbies;
+
+    public Person(String name, Integer age, boolean student, String email, List<String> hobbies) {
+        this.name = name;
+        this.age = age;
+        this.student = student;
+        this.email = email;
+        this.hobbies = hobbies;
+    }
 
     public Person(String name, Integer age, boolean student) {
         this.name = name;
@@ -51,6 +60,14 @@ public class Person {
 
     public void setHobbies(List<String> hobbies) {
         this.hobbies = hobbies;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
