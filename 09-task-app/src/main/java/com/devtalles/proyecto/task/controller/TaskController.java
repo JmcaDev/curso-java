@@ -33,9 +33,25 @@ public class TaskController {
     public void showTasks() throws TaskValidationException, TaskException {
         List<Task> tasks = this.taskRepository.findAll();
         if(tasks.isEmpty()){
-            throw new TaskValidationException("La lista no puede estar vacia");
+            throw new TaskValidationException("La lista esta vacia");
         }
         for(Task task: tasks){
+            System.out.println(task);
+        }
+    }
+
+    public void showCompletedTasks() throws TaskValidationException, TaskException {
+        List<Task> completedTasks = this.taskRepository.findCompletedTasks();
+
+        for(Task task: completedTasks){
+            System.out.println(task);
+        }
+    }
+
+    public void showPendingTasks() throws TaskValidationException, TaskException {
+        List<Task> pendingTasks = this.taskRepository.findPendingTasks();
+
+        for(Task task: pendingTasks){
             System.out.println(task);
         }
     }
@@ -44,6 +60,11 @@ public class TaskController {
         validateTaskData(id, title, description, completed);
         Task task = new Task(id, title, description, completed);
         this.taskRepository.updateTask(task);
+    }
+
+    public void updateTaskCompleted(String id, Boolean completed) throws TaskValidationException, TaskException {
+        validateTaskData(id,completed);
+        this.taskRepository.updateTaskCompleted(id, completed);
     }
 
     private void validateTaskData(String id, String title, String description, Boolean completed) throws TaskValidationException {
@@ -57,6 +78,16 @@ public class TaskController {
 
         if(description==null || description.trim().isEmpty()){
             throw new TaskValidationException("La descripcion no puede estar vacio");
+        }
+
+        if(completed==null){
+            throw new TaskValidationException("El estado no puede ser nulo");
+        }
+    }
+
+    private void validateTaskData(String id, Boolean completed) throws TaskValidationException {
+        if(id==null || id.trim().equals("")){
+            throw new TaskValidationException("El id no puede estar vacio");
         }
 
         if(completed==null){

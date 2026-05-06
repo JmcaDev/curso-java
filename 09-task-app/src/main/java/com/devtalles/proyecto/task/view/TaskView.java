@@ -22,12 +22,18 @@ public class TaskView {
             System.out.println("1. Agregar Tarea");
             System.out.println("2. Eliminar Tarea");
             System.out.println("3. Actualizar Tarea");
-            System.out.println("4. Mostrar Tarea");
-            System.out.println("5. Salir");
+            System.out.println("4. Actualizar estado de la tarea");
+            System.out.println("5. Mostrar Tareas");
+            System.out.println("6. Mostrar Tareas Pendientes");
+            System.out.println("7. Mostrar Tareas Completadas");
+            System.out.println("0. Salir");
             System.out.println("Seleccione una opcion: ");
 
             String option = scanner.nextLine();
             switch (option){
+                case "0":
+                    System.out.println("Saliendo del sistema");
+                    return;
                 case "1":
                     addTaskView();
                     break;
@@ -38,11 +44,17 @@ public class TaskView {
                     updateTaskView();
                     break;
                 case "4":
-                    showTasksView();
+                    updateTaskCompletedView();
                     break;
                 case "5":
-                    System.out.println("Saliendo del sistema");
-                    return;
+                    showTasksView();
+                    break;
+                case "6":
+                    showPendingTasksView();
+                    break;
+                case "7":
+                    showCompletedTasksView();
+                    break;
                 default:
                     System.out.println("Opcion invalida, intente nuevamente");
                     break;
@@ -82,7 +94,6 @@ public class TaskView {
         try{
             System.out.println("\nLista de Tareas:");
             this.taskController.showTasks();
-            System.out.println("Tarea eliminada correctamente");
         }catch(TaskValidationException | TaskException e){
             System.out.println("Error: " + e.getMessage());
         }catch (Exception e){
@@ -100,6 +111,56 @@ public class TaskView {
         } catch (TaskValidationException | TaskException e) {
             System.out.println("Error: " + e.getMessage());
         } catch (Exception e) {
+            System.out.println("Error inesperado, Contacte con el soporte");
+            e.printStackTrace();
+        }
+    }
+
+    public void updateTaskCompletedView(){
+        Boolean completed=null;
+        try {
+            String id = validateValue("Ingrese el ID a de la tarea: ", "El ID no puede estar vacio");
+
+            while (completed==null){
+                System.out.println("¿Esta completada? true/false");
+                String input = scanner.nextLine().trim().toLowerCase();
+                if(input.equals("true")){
+                    completed = true;
+                }else if(input.equals("false")){
+                    completed = false;
+                }else{
+                    System.out.println("El valor ingresado no es valido, ingrese: true o false");
+                }
+            }
+            taskController.updateTaskCompleted(id, completed);
+            System.out.println("Estado de la tarea actualizada correctamente");
+        } catch (TaskValidationException | TaskException e) {
+            System.out.println("Error: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error inesperado, Contacte con el soporte");
+            e.printStackTrace();
+        }
+    }
+
+    public void showCompletedTasksView(){
+        try{
+            System.out.println("\nTareas Completada");
+            taskController.showCompletedTasks();
+        }catch (TaskValidationException | TaskException e){
+            System.out.println("Error: " + e.getMessage());
+        } catch (Exception e){
+            System.out.println("Error inesperado, Contacte con el soporte");
+            e.printStackTrace();
+        }
+    }
+
+    public void showPendingTasksView(){
+        try{
+            System.out.println("\nTareas Pendientes");
+            taskController.showPendingTasks();
+        }catch (TaskValidationException | TaskException e){
+            System.out.println("Error: " + e.getMessage());
+        } catch (Exception e){
             System.out.println("Error inesperado, Contacte con el soporte");
             e.printStackTrace();
         }
